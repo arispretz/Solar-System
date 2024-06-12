@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Solar System</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Calculate the weight of an object on a planet</h1>
+        
+        <h6>Created by Ariana Spretz</h6>
+
+        <input type="text" id="mass" placeholder="Mass in Kilograms" />
+        <select>
+            <option value="none">--select planet--</option>
+        </select>
+        <button>Calculate weight</button>
+    </header>
+
+    <main>
+        <div class="flex-container">
+            <div class="flex-item image">
+                <img src="https://cdn.glitch.global/ae78b9fd-bfad-4038-aa7d-ee75170dd0e6/thumbnails%2Fearth.png?1717978077171" class="planet-image" />
+            </div>
+            <div class="flex-item description"></div>
+        </div>
+    </main>
+
+    <script>
+        document.body.style.backgroundImage = 'url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvsZZx_DCcp4_HxT7VDkU9cp_Yxr8y0aJ62lz1ySuxD579_qzwXI_qN2k1C4mgCD2-QwSa1qYI6gjRC9Mb8uZ_bGja4cVhBorsaCu7ohT0VivBq6qeNxjDt85-GxClmICBgA9QafhkNqklMtau2S6AJGOb-kuno_vF9BMgs8-rXBGGRlB0Oza5v9wZQs4N/s1600/galaxy.gif")';
+        document.body.style.backgroundSize = 'cover';
+        document.body.style.backgroundPosition = 'center';
+        
+        const square = document.createElement('div');
+        square.style.width = '1000px'; 
+        square.style.height = '420px'; 
+        square.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'; 
+        square.style.position = 'absolute'; 
+        square.style.zIndex = '-1'; 
+        square.style.marginLeft = '130px';
+        square.style.display = 'flex';
+        square.style.justifyContent = 'center';
+        square.style.alignItems = 'center';
+
+        const imageContainer = document.querySelector('.flex-item.image');
+
+        imageContainer.parentNode.insertBefore(square, imageContainer);
+
+		    const h1 = document.querySelector('h1');
+		    h1.style.color = 'white';
+		    h1.style.textAlign = 'center';
+		    h1.style.justifyContent = 'center';
+		    h1.style.paddingTop = '10px';
+		    h1.style.paddingBottom = '20px';
+		    h1.style.zIndex = '1'; 
+		    h1.style.position = 'relative'; 
+		    h1.style.top = '0'; 
+		    h1.style.left = '0';
+
+        const planetsData = {
+            'Mercury': 'https://cdn.glitch.global/ae78b9fd-bfad-4038-aa7d-ee75170dd0e6/thumbnails%2Fmercury.png?1717977986284',
+            'Venus': 'https://cdn.glitch.global/ae78b9fd-bfad-4038-aa7d-ee75170dd0e6/thumbnails%2Fvenus.png?1717977924739',
+            'Earth': 'https://cdn.glitch.global/ae78b9fd-bfad-4038-aa7d-ee75170dd0e6/thumbnails%2Fearth.png?1717978077171',
+            'Mars': 'https://cdn.glitch.global/ae78b9fd-bfad-4038-aa7d-ee75170dd0e6/thumbnails%2Fmars.png?1717978015006',
+            'Jupiter': 'https://cdn.glitch.global/ae78b9fd-bfad-4038-aa7d-ee75170dd0e6/thumbnails%2Fjupiter.png?1717978032837',
+            'Saturn': 'https://cdn.glitch.global/ae78b9fd-bfad-4038-aa7d-ee75170dd0e6/thumbnails%2Fsaturn.png?1717977903808',
+            'Uranus': 'https://cdn.glitch.global/ae78b9fd-bfad-4038-aa7d-ee75170dd0e6/thumbnails%2Furanus.png?1717977894653',
+            'Neptune': 'https://cdn.glitch.global/ae78b9fd-bfad-4038-aa7d-ee75170dd0e6/thumbnails%2Fneptune.png?1717977944490',
+            'Pluto': 'https://cdn.glitch.global/ae78b9fd-bfad-4038-aa7d-ee75170dd0e6/thumbnails%2Fpluto.png?1717977914619',
+            'Moon': 'https://cdn.glitch.global/ae78b9fd-bfad-4038-aa7d-ee75170dd0e6/thumbnails%2Fmoon.png?1717977970909'
+        };
+       
+        const select = document.querySelector('select');
+        select.setAttribute('id', 'planets');
+        select.style.border = 'none';
+      
+        const selectElem = document.getElementById('planets');
+        
+        selectElem.addEventListener('change', function () {
+            const selectedPlanet = this.value;
+            if (selectedPlanet !== 'none') {
+                planetImage.src = planetsData[selectedPlanet];
+            } else {
+                planetImage.src = ''; 
+            }
+        });
+       
+        const planetImage = document.querySelector('.planet-image');
+        planetImage.style.width = '300px';
+        planetImage.style.height = '300px';
+        planetImage.style.paddingTop = '52px';
+      
+        const planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Moon'];
+        
+        planets.forEach(planet => {
+    
+        const option = document.createElement('option');
+        option.value = planet; 
+        option.textContent = planet;
+        selectElem.appendChild(option);
+});
+
+		    const button = document.querySelector('button');
+		    button.style.backgroundColor = 'magenta';
+		    button.style.color = 'purple';
+		    button.style.fontFamily = 'arial-narrow';
+        button.style.fontWeight = 'bold';
+        button.style.fontSize = '14px';
+
+        const flexContainer = document.querySelector('.flex-container');
+        flexContainer.style.display = 'block';
+        flexContainer.style.justifyContent = 'center';
+        flexContainer.style.alignItems = 'center';
+        flexContainer.style.textAlign = 'center';
+        flexContainer.style.zIndex = '-1';
+        flexContainer.style.marginLeft = '15px';
+        flexContainer.style.paddingBottom = '25px';
+
+        const spanInput = document.createElement('span');
+        const spanSelect = document.createElement('span');
+        const spanButton = document.createElement('span');
+
+        const inputElement = document.getElementById('mass');
+        inputElement.style.border = 'none';
+        const selectElements = document.querySelector('select');
+        const buttonElements = document.querySelector('button');
+
+        spanInput.appendChild(inputElement);
+        spanSelect.appendChild(selectElements);
+        spanButton.appendChild(buttonElements);
+
+        flexContainer.appendChild(spanInput);
+        flexContainer.appendChild(spanSelect);
+        flexContainer.appendChild(spanButton);
+
+        const inputContainer = document.createElement('div');
+        inputContainer.setAttribute('class', 'input-container');
+        inputContainer.appendChild(inputElement);
+        inputContainer.appendChild(selectElements);
+        inputContainer.appendChild(buttonElements);
+        inputContainer.style.paddingBottom = '30px';
+
+        flexContainer.insertBefore(inputContainer, flexContainer.firstChild);
+
+        const massInput = document.getElementById('mass');
+        const selectElement = document.querySelector('select');
+        const buttonElement = document.querySelector('button');
+        const planetIm = document.querySelector('.planet-image');
+        const flexWrapper = document.querySelector('.flex-container');
+        const descriptionDiv = document.querySelector('.description');
+
+        function displayErrorMessage(message) {
+          const errorMessage = document.createElement('div');
+          errorMessage.setAttribute('class', 'blur-background');
+          planetIm.style.display = 'none';
+    
+          const existingErrorMessages = document.getElementsByClassName('blur-background');
+    
+          for (let i = 0; i < existingErrorMessages.length; i++) {
+            existingErrorMessages[i].style.display = 'none';
+        }
+
+        errorMessage.textContent = message;
+        errorMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.3)'; 
+        errorMessage.style.fontSize = '36px';
+        errorMessage.style.width = '600px';
+        errorMessage.style.height = '100px';
+        errorMessage.style.paddingTop = '25px';
+        errorMessage.style.color = 'white'; 
+        errorMessage.style.textAlign = 'center';
+        errorMessage.style.position = 'fixed';
+        errorMessage.style.top = '60%';
+        errorMessage.style.right = '27%';
+        errorMessage.style.transform = 'translateY(-50%)';
+        flexWrapper.appendChild(errorMessage);
+        }
+
+        function displayWeightCalculation(planetName, weight) {
+          planetIm.src = planetsData[planetName];
+          planetIm.style.display = 'block';
+          planetIm.style.width = '300px';
+          planetIm.style.height = '300px';
+          planetIm.style.position = 'fixed';
+          planetIm.style.top = '56%';
+          planetIm.style.left = '15%';
+          planetIm.style.transform = 'translateY(-50%)';
+          planetIm.style.paddingTop = '80px';
+
+        const resultMessage = document.createElement('div');
+        resultMessage.innerHTML = `The weight of the object on <span style="color: darkblue; font-weight: bold; font-size: 50px; font-style: italic;">${planetName}</span>`;
+        resultMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+        resultMessage.style.padding = '10px';
+        resultMessage.style.fontSize = '30px';
+        resultMessage.style.width = '500px';
+        resultMessage.style.height = '85px';
+        resultMessage.style.textAlign = 'center';
+        resultMessage.style.color = 'white';
+        resultMessage.style.position = 'fixed';
+        resultMessage.style.top = '45%';
+        resultMessage.style.right = '18%';
+        resultMessage.style.transform = 'translateY(-50%)';
+        resultMessage.style.paddingTop = '40px';
+
+        const weightResult = document.createElement('div');
+        weightResult.textContent = weight;
+        weightResult.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+        weightResult.style.padding = '10px';
+        weightResult.style.fontSize = '24px';
+        weightResult.style.width = '120px';
+        weightResult.style.height = '95px';
+        weightResult.style.textAlign = 'center';
+        weightResult.style.color = 'white';
+        weightResult.style.borderRadius = '50%';
+        weightResult.style.position = 'fixed';
+        weightResult.style.top = '76%';
+        weightResult.style.right = '33%';
+        weightResult.style.transform = 'translateY(-50%)';
+        weightResult.style.paddingTop = '80px';
+
+        descriptionDiv.innerHTML = '';
+        descriptionDiv.appendChild(resultMessage);
+        descriptionDiv.appendChild(weightResult);
+    }
+
+        function clearErrorMessages() {
+          const blurBackground = document.getElementsByClassName('blur-background');
+          const errorMessages = document.getElementsByClassName('error-message');
+
+        for (let i = 0; i < blurBackground.length; i++) {
+          blurBackground[i].style.display = 'none';
+      }
+
+        for (let j = 0; j < errorMessages.length; j++) {
+          errorMessages[j].style.display = 'none';
+      }
+  }
+
+
+function calculateWeight(planetName, mass) {
+    const gravity = {
+        'Mercury': 3.7,
+        'Venus': 8.87,
+        'Earth': 9.81,
+        'Mars': 3.71,
+        'Jupiter': 24.79,
+        'Saturn': 10.44,
+        'Uranus': 8.69,
+        'Neptune': 11.15,
+        'Pluto': 0.62,
+        'Moon': 1.62 
+    };
+    
+
+    if (planetName in gravity) {
+        const weight = mass * gravity[planetName];
+        return weight.toFixed(2) + ' N'; 
+    } else {
+        console.error('Gravity not found');
+        return 'Error';
+    }
+}
+
+    function updatePlanetData(planetName, mass) {
+      let isFirstSelection = true;
+
+    document.querySelector('option:checked').addEventListener('click', function() {
+      if (isFirstSelection) {
+        const planetImageElement = document.getElementById('planet-image');
+        planetImageElement.src = `./images/${planetName.toLowerCase()}.png`;
+        
+        isFirstSelection = false;
+    }
+});
+
+    const weight = calculateWeight(planetName, mass);
+}
+
+    buttonElement.addEventListener('click', function() {
+      const selectedPlanet = selectElement.value;
+      const mass = massInput.value;
+
+    clearErrorMessages(); 
+
+    if (mass === '') {
+        displayErrorMessage('Mass is required');
+    } else if (selectedPlanet === 'none') {
+        displayErrorMessage('You did not choose a planet yet');
+    } else {
+        const weight = calculateWeight(selectedPlanet, mass); 
+        displayWeightCalculation(selectedPlanet, weight);
+    }
+});
+
+
+    selectElement.addEventListener('change', function() {
+      const previousSelectedOption = selectElement.querySelector('option[selected]');
+        if (previousSelectedOption) {
+          previousSelectedOption.textContent = previousSelectedOption.textContent.replace('✔️ ', '');
+          previousSelectedOption.removeAttribute('selected');
+    }
+
+    const selectedOption = selectElement.querySelector('option:checked');
+    selectedOption.textContent = '✔️ ' + selectedOption.textContent;
+    selectedOption.setAttribute('selected', 'selected');
+
+    updatePlanetData(selectedOption.value); 
+});
+    const h6 = document.querySelector('h6');
+    h6.textContent = 'Created by Ariana Spretz';
+    h6.style.color = 'magenta';
+    h6.style.textAlign = 'center';
+    h6.style.fontWeight = 'bold';
+    h6.style.marginTop = '-20px';
+      
+    </script>
+  
+</body>
+
+</html>
